@@ -1,4 +1,6 @@
 rootProject.name = 'planner-backend-micro'
 
 includeBuild 'eureka-server'
+includeBuild 'eureka-client'
+includeBuild 'api-gateway'
 
