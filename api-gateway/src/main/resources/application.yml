@@ -1,5 +1,5 @@
 server:
-  port: 8082
+  port: 8765
 
 spring:
   cloud:
@@ -14,10 +14,15 @@ spring:
           predicates:
             - Path=/main/test
             - Method=GET
+        - id: name
+          uri: lb://eureka-client-2
+          predicates:
+            - Path=/new/name
+            - Method=GET
   application:
     name: api-gateway-ms
 
 eureka:
   client:
     service-url:
-      defaultZone: http://localhost:8081/eureka
+      defaultZone: http://localhost:8761/eureka
