@@ -27,6 +27,11 @@
                   <project path="$PROJECT_DIR$/eureka-server" />
                 </projects>
               </build>
+              <build path="$PROJECT_DIR$/github-config-server" name="github-config-server">
+                <projects>
+                  <project path="$PROJECT_DIR$/github-config-server" />
+                </projects>
+              </build>
             </builds>
           </compositeBuild>
         </compositeConfiguration>
@@ -39,6 +44,7 @@
             <option value="$PROJECT_DIR$/eureka-client" />
             <option value="$PROJECT_DIR$/eureka-client-2" />
             <option value="$PROJECT_DIR$/eureka-server" />
+            <option value="$PROJECT_DIR$/github-config-server" />
           </set>
         </option>
       </GradleProjectSettings>
@@ -71,6 +77,14 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$/eureka-server" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+      <GradleProjectSettings>
+        <option name="externalProjectPath" value="$PROJECT_DIR$/github-config-server" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/github-config-server" />
           </set>
         </option>
       </GradleProjectSettings>
