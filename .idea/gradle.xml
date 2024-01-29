@@ -22,14 +22,14 @@
                   <project path="$PROJECT_DIR$/eureka-client-2" />
                 </projects>
               </build>
-              <build path="$PROJECT_DIR$/eureka-server" name="eureka-server">
+              <build path="$PROJECT_DIR$/planner-eureka-server" name="planner-eureka-server">
                 <projects>
-                  <project path="$PROJECT_DIR$/eureka-server" />
+                  <project path="$PROJECT_DIR$/planner-eureka-server" />
                 </projects>
               </build>
-              <build path="$PROJECT_DIR$/github-config-server" name="github-config-server">
+              <build path="$PROJECT_DIR$/planner-github-config-server" name="planner-github-config-server">
                 <projects>
-                  <project path="$PROJECT_DIR$/github-config-server" />
+                  <project path="$PROJECT_DIR$/planner-github-config-server" />
                 </projects>
               </build>
             </builds>
@@ -43,8 +43,8 @@
             <option value="$PROJECT_DIR$/api-gateway" />
             <option value="$PROJECT_DIR$/eureka-client" />
             <option value="$PROJECT_DIR$/eureka-client-2" />
-            <option value="$PROJECT_DIR$/eureka-server" />
-            <option value="$PROJECT_DIR$/github-config-server" />
+            <option value="$PROJECT_DIR$/planner-eureka-server" />
+            <option value="$PROJECT_DIR$/planner-github-config-server" />
           </set>
         </option>
       </GradleProjectSettings>
@@ -73,18 +73,18 @@
         </option>
       </GradleProjectSettings>
       <GradleProjectSettings>
-        <option name="externalProjectPath" value="$PROJECT_DIR$/eureka-server" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/planner-eureka-server" />
         <option name="modules">
           <set>
-            <option value="$PROJECT_DIR$/eureka-server" />
+            <option value="$PROJECT_DIR$/planner-eureka-server" />
           </set>
         </option>
       </GradleProjectSettings>
       <GradleProjectSettings>
-        <option name="externalProjectPath" value="$PROJECT_DIR$/github-config-server" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/planner-github-config-server" />
         <option name="modules">
           <set>
-            <option value="$PROJECT_DIR$/github-config-server" />
+            <option value="$PROJECT_DIR$/planner-github-config-server" />
           </set>
         </option>
       </GradleProjectSettings>

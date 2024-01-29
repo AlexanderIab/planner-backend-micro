@@ -1,0 +1,15 @@
+server:
+  port: 8888
+spring:
+  application:
+    name: github-config-server
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/AlexanderIab/planner-backend-micro-properties.git
+          basedir: file://C:/git-prop-planner-micro
+          clone-on-start: true
+          username: AlexanderIab
+          password: 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
+          default-label: main
