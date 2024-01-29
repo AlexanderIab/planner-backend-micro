@@ -1,10 +1,10 @@
-package com.iablonski.eurekaclient2;
+package com.iablonski.planner;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class EurekaClient2ApplicationTests {
+class PlannerEntityApplicationTests {
 
     @Test
     void contextLoads() {
