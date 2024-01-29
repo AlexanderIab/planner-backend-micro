@@ -11,5 +11,5 @@ spring:
           basedir: file://C:/git-prop-planner-micro
           clone-on-start: true
           username: AlexanderIab
-          password: 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
+          password: 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
           default-label: main
