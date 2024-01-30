@@ -1,5 +1,4 @@
 rootProject.name = 'planner-backend-micro'
-
 includeBuild 'planner-eureka-server'
 includeBuild 'planner-todo'
 includeBuild 'planner-entity'
