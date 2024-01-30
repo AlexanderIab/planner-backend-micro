@@ -1,10 +1,10 @@
-package com.iablonski.eurekaclient;
+package com.iablonski.planner.todo;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class EurekaClientApplicationTests {
+class PlannerTodoApplicationTests {
 
     @Test
     void contextLoads() {
