@@ -13,7 +13,7 @@ import org.hibernate.type.NumericBooleanConverter;
 import java.util.Date;
 
 @Entity
-@Table(name = "task", schema = "todolist", catalog = "planner")
+@Table(name = "task", schema = "todo", catalog = "planner_todo")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter

@@ -10,7 +10,7 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 @Entity
-@Table(name = "priority", schema = "todolist", catalog = "planner")
+@Table(name = "priority", schema = "todo", catalog = "planner_todo")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter

@@ -11,7 +11,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import java.util.Set;
 
 @Entity
-@Table(name = "user_data", schema = "todolist", catalog = "planner")
+@Table(name = "user_data", schema = "users", catalog = "planner_users")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
