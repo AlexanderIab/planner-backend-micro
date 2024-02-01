@@ -5,4 +5,5 @@ includeBuild 'planner-entity'
 includeBuild 'planner-gateway'
 includeBuild 'planner-github-config-server'
 includeBuild 'planner-utils'
+includeBuild 'planner-users'
 
