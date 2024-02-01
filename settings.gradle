@@ -4,4 +4,5 @@ includeBuild 'planner-todo'
 includeBuild 'planner-entity'
 includeBuild 'planner-gateway'
 includeBuild 'planner-github-config-server'
+includeBuild 'planner-utils'
 
