@@ -42,7 +42,11 @@ public class TaskController {
 
     @PostMapping("/add")
     public ResponseEntity<MessageResponse> createTask(@RequestBody TaskDTO taskDTO){
-        userWebClientBuilder.userExists(taskDTO.userId());
+        // Since it is important for us to receive the response and
+        // then execute the next method, an asynchronous call is not suitable here,
+        // so this is only a demonstration
+        userWebClientBuilder.userExists(taskDTO.userId()).subscribe(user -> System.out.println("user = " + user.getUsername()));
+
         taskService.createTask(taskDTO);
         return new ResponseEntity<>(new MessageResponse("Successfully created"), HttpStatus.OK);
     }

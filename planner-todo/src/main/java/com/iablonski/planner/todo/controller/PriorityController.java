@@ -38,7 +38,11 @@ public class PriorityController {
 
     @PostMapping("/add")
     public ResponseEntity<MessageResponse> createPriority(@RequestBody PriorityDTO priorityDTO){
-        userWebClientBuilder.userExists(priorityDTO.userId());
+        // Since it is important for us to receive the response and
+        // then execute the next method, an asynchronous call is not suitable here,
+        // so this is only a demonstration
+        userWebClientBuilder.userExists(priorityDTO.userId()).subscribe(user -> System.out.println("user = " + user.getUsername()));
+
         priorityService.createPriority(priorityDTO);
         return new ResponseEntity<>(new MessageResponse("Successfully created"), HttpStatus.OK);
     }

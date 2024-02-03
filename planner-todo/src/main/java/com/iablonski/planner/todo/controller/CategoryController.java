@@ -42,7 +42,10 @@ public class CategoryController {
 
     @PostMapping("/add")
     public ResponseEntity<MessageResponse> createCategory(@RequestBody CategoryDTO categoryDTO){
-        userWebClientBuilder.userExists(categoryDTO.userId());
+        // Since it is important for us to receive the response and
+        // then execute the next method, an asynchronous call is not suitable here,
+        // so this is only a demonstration
+        userWebClientBuilder.userExists(categoryDTO.userId()).subscribe(user -> System.out.println("user = " + user.getUsername()));
         categoryService.createCategory(categoryDTO);
         return new ResponseEntity<>(new MessageResponse("Successfully created"), HttpStatus.OK);
     }
