@@ -1,5 +1,6 @@
 package com.iablonski.planner.entity;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -11,7 +12,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import java.util.Set;
 
 @Entity
-@Table(name = "user_data", schema = "todolist", catalog = "planner")
+@Table(name = "user_data", schema = "users", catalog = "planner_users")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -29,6 +30,7 @@ public class User {
     @Column(name = "userpassword")
     private String password;
 
-    @ManyToMany(mappedBy = "users"/*, fetch = FetchType.EAGER*/)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @ManyToMany(mappedBy = "users")
     private Set<Role> roles;
 }
