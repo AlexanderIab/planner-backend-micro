@@ -2,6 +2,7 @@ package com.iablonski.planner.todo.service.serviceImpl;
 
 import com.iablonski.planner.entity.Priority;
 import com.iablonski.planner.todo.dto.PriorityDTO;
+import com.iablonski.planner.todo.mapper.PriorityMapper;
 import com.iablonski.planner.todo.repository.PriorityRepo;
 import com.iablonski.planner.todo.service.PriorityService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,17 +16,19 @@ import java.util.stream.Collectors;
 public class PriorityServiceImpl implements PriorityService {
 
     private final PriorityRepo priorityRepo;
+    private final PriorityMapper priorityMapper;
 
     @Autowired
-    public PriorityServiceImpl(PriorityRepo priorityRepo) {
+    public PriorityServiceImpl(PriorityRepo priorityRepo, PriorityMapper priorityMapper) {
         this.priorityRepo = priorityRepo;
+        this.priorityMapper = priorityMapper;
     }
 
 
     @Override
     public PriorityDTO getPriorityById(Long id) {
         Priority priority = priorityRepo.findById(id).orElseThrow();
-        return PriorityDTO.toDTO(priority);
+        return priorityMapper.toDTO(priority);
     }
 
     @Override
@@ -55,14 +58,14 @@ public class PriorityServiceImpl implements PriorityService {
     @Override
     public List<PriorityDTO> getPrioritiesByUserId(Long userId) {
         return priorityRepo.findByUserIdOrderByTitleAsc(userId).stream()
-                .map(PriorityDTO::toDTO)
+                .map(priorityMapper::toDTO)
                 .collect(Collectors.toList());
     }
 
     @Override
     public List<PriorityDTO> findByTitle(String title, Long userId) {
         return priorityRepo.findByTitle(title, userId).stream()
-                .map(PriorityDTO::toDTO)
+                .map(priorityMapper::toDTO)
                 .collect(Collectors.toList());
     }
 }

@@ -2,12 +2,14 @@ package com.iablonski.planner.todo.service.serviceImpl;
 
 import com.iablonski.planner.entity.Task;
 import com.iablonski.planner.todo.dto.TaskDTO;
+import com.iablonski.planner.todo.mapper.TaskMapper;
 import com.iablonski.planner.todo.repository.TaskRepo;
 import com.iablonski.planner.todo.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.List;
@@ -18,30 +20,31 @@ import java.util.stream.Collectors;
 public class TaskServiceImpl implements TaskService {
 
     private final TaskRepo taskRepo;
+    private final TaskMapper taskMapper;
 
     @Autowired
-    public TaskServiceImpl(TaskRepo taskRepo) {
+    public TaskServiceImpl(TaskRepo taskRepo, TaskMapper taskMapper) {
         this.taskRepo = taskRepo;
+        this.taskMapper = taskMapper;
     }
 
     @Override
     public TaskDTO getTaskById(Long id) {
         Task task = taskRepo.findById(id).orElseThrow();
-        return TaskDTO.toDTO(task);
+        return taskMapper.toDTO(task);
     }
 
     @Override
     public void createTask(TaskDTO taskDTO) {
-        Task task = toTask(taskDTO);
+        Task task = taskMapper.toTask(taskDTO);
+        task.setId(null);
         taskRepo.save(task);
     }
-
 
     @Override
     public void updateTask(TaskDTO taskDTO) {
         taskRepo.findById(taskDTO.id()).orElseThrow();
-        Task task = toTask(taskDTO);
-        task.setId(taskDTO.id());
+        Task task = taskMapper.toTask(taskDTO);
         taskRepo.save(task);
     }
 
@@ -54,7 +57,7 @@ public class TaskServiceImpl implements TaskService {
     @Override
     public List<TaskDTO> getTasksByUserId(Long userId) {
         return taskRepo.findByUserIdOrderByTitleAsc(userId).stream()
-                .map(TaskDTO::toDTO)
+                .map(taskMapper::toDTO)
                 .collect(Collectors.toList());
     }
 
@@ -66,17 +69,6 @@ public class TaskServiceImpl implements TaskService {
         Page<Task> page = taskRepo.findTaskByParams(
                 title, completed, userId, priorityId,
                 categoryId, dateFrom, dateTo, pageRequest);
-        return page.map(TaskDTO::toDTO);
-    }
-
-    private Task toTask(TaskDTO taskDTO) {
-        Task task  = new Task();
-        task.setTitle(taskDTO.title());
-        task.setCompleted(taskDTO.completed());
-        task.setPriority(taskDTO.priority());
-        task.setTaskDate(taskDTO.taskDate());
-        task.setUserId(taskDTO.userId());
-        task.setCategory(taskDTO.category());
-        return task;
+        return page.map(taskMapper::toDTO);
     }
 }
