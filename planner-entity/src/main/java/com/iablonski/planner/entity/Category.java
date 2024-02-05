@@ -26,10 +26,6 @@ public class Category {
     private Long completedCount;
     @Column(name = "uncompleted_count", updatable = false)
     private Long uncompletedCount;
-    //    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "user_id", referencedColumnName = "id")
-//    private User user;
     @Column(name = "user_id")
     private Long userId;
 }

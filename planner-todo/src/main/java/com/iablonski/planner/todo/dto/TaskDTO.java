@@ -15,14 +15,7 @@ public record TaskDTO (
         Category category,
         Long userId) {
 
-    public static TaskDTO toDTO(Task task){
-        return new TaskDTO(
-                task.getId(),
-                task.getTitle(),
-                task.getCompleted(),
-                task.getTaskDate(),
-                task.getPriority(),
-                task.getCategory(),
-                task.getUserId());
+    public TaskDTO(String title, Boolean completed, Date taskDate, Priority priority, Category category, Long userId) {
+        this(null, title, completed, taskDate, priority, category, userId);
     }
 }

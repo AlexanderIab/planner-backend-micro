@@ -24,11 +24,6 @@ public class Activity {
     private Boolean activated;
     @Column(updatable = false)
     private String uuid;
-//    @OneToOne(fetch = FetchType.LAZY)
-//    @MapsId
-//    @JoinColumn(name = "user_id", referencedColumnName = "id")
-//    private User user;
-
     @Column(name = "user_id")
     private Long userId;
 
