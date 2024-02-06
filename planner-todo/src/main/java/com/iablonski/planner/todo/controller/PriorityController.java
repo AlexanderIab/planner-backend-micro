@@ -1,10 +1,10 @@
 package com.iablonski.planner.todo.controller;
 
 import com.iablonski.planner.todo.dto.PriorityDTO;
+import com.iablonski.planner.todo.feign.UserFeignClient;
 import com.iablonski.planner.todo.payload.response.MessageResponse;
 import com.iablonski.planner.todo.search.PrioritySearchValues;
 import com.iablonski.planner.todo.service.PriorityService;
-import com.iablonski.planner.utils.webclient.UserWebClientBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,12 +17,12 @@ import java.util.List;
 public class PriorityController {
 
     private final PriorityService priorityService;
-    private final UserWebClientBuilder userWebClientBuilder;
+    private final UserFeignClient userFeignClient;
 
     @Autowired
-    public PriorityController(PriorityService priorityService, UserWebClientBuilder userWebClientBuilder) {
+    public PriorityController(PriorityService priorityService, UserFeignClient userFeignClient) {
         this.priorityService = priorityService;
-        this.userWebClientBuilder = userWebClientBuilder;
+        this.userFeignClient = userFeignClient;
     }
 
     @PostMapping("/id")
@@ -38,14 +38,13 @@ public class PriorityController {
 
     @PostMapping("/add")
     public ResponseEntity<MessageResponse> createPriority(@RequestBody PriorityDTO priorityDTO){
-        userWebClientBuilder.userExists(priorityDTO.userId());
+        userFeignClient.getUserById(priorityDTO.userId());
         priorityService.createPriority(priorityDTO);
         return new ResponseEntity<>(new MessageResponse("Successfully created"), HttpStatus.OK);
     }
 
     @PutMapping("/update")
     public ResponseEntity<MessageResponse> updatePriority(@RequestBody PriorityDTO priorityDTO){
-        userWebClientBuilder.userExists(priorityDTO.userId());
         priorityService.updatePriority(priorityDTO);
         return new ResponseEntity<>(new MessageResponse("Successfully updated"), HttpStatus.OK);
     }

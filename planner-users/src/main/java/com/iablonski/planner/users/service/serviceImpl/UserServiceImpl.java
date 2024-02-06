@@ -4,6 +4,7 @@ import com.iablonski.planner.entity.User;
 import com.iablonski.planner.users.dto.UserDTO;
 import com.iablonski.planner.users.mapper.UserMapper;
 import com.iablonski.planner.users.repository.UserRepo;
+import com.iablonski.planner.users.response.MessageResponse;
 import com.iablonski.planner.users.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -19,6 +20,7 @@ public class UserServiceImpl implements UserService {
 
     private final UserRepo userRepo;
     private final UserMapper userMapper;
+
     @Autowired
     public UserServiceImpl(UserRepo userRepo, UserMapper userMapper) {
         this.userRepo = userRepo;
@@ -38,14 +40,15 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User createUser(UserDTO userDTO) {
+    public void createUser(UserDTO userDTO) {
         User user = userMapper.toUser(userDTO);
         user.setId(null);
-        return userRepo.save(user);
+        userRepo.save(user);
     }
 
     @Override
     public void updateUser(UserDTO userDTO) {
+        if (!userRepo.existsById(userDTO.id())) throw new RuntimeException("User already exists");
         User user = userMapper.toUser(userDTO);
         userRepo.save(user);
     }

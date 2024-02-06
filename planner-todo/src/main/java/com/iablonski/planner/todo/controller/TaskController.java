@@ -1,10 +1,10 @@
 package com.iablonski.planner.todo.controller;
 
 import com.iablonski.planner.todo.dto.TaskDTO;
+import com.iablonski.planner.todo.feign.UserFeignClient;
 import com.iablonski.planner.todo.search.TaskSearchValues;
 import com.iablonski.planner.todo.service.TaskService;
 import com.iablonski.planner.todo.payload.response.MessageResponse;
-import com.iablonski.planner.utils.webclient.UserWebClientBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -20,13 +20,12 @@ import java.util.List;
 public class TaskController {
     public static final String ID_COLUMN = "id";
     private final TaskService taskService;
-
-    private final UserWebClientBuilder userWebClientBuilder;
+    private final UserFeignClient userFeignClient;
 
     @Autowired
-    public TaskController(TaskService taskService, UserWebClientBuilder userWebClientBuilder) {
+    public TaskController(TaskService taskService, UserFeignClient userFeignClient) {
         this.taskService = taskService;
-        this.userWebClientBuilder = userWebClientBuilder;
+        this.userFeignClient = userFeignClient;
     }
 
     @PostMapping("/id")
@@ -42,7 +41,7 @@ public class TaskController {
 
     @PostMapping("/add")
     public ResponseEntity<MessageResponse> createTask(@RequestBody TaskDTO taskDTO){
-        userWebClientBuilder.userExists(taskDTO.userId());
+        userFeignClient.getUserById(taskDTO.userId());
         taskService.createTask(taskDTO);
         return new ResponseEntity<>(new MessageResponse("Successfully created"), HttpStatus.OK);
     }

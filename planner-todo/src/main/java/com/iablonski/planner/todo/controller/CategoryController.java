@@ -1,10 +1,10 @@
 package com.iablonski.planner.todo.controller;
 
 import com.iablonski.planner.todo.dto.CategoryDTO;
+import com.iablonski.planner.todo.feign.UserFeignClient;
 import com.iablonski.planner.todo.payload.response.MessageResponse;
 import com.iablonski.planner.todo.search.CategorySearchValues;
 import com.iablonski.planner.todo.service.CategoryService;
-import com.iablonski.planner.utils.webclient.UserWebClientBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,14 +19,14 @@ import java.util.List;
 public class CategoryController {
 
     private final CategoryService categoryService;
-    private final UserWebClientBuilder userWebClientBuilder;
+    private final UserFeignClient userFeignClient;
 //    private final ResponseErrorMessage errorMessage;
 
     @Autowired
-    public CategoryController(CategoryService categoryService, UserWebClientBuilder userWebClientBuilder /*ResponseErrorMessage errorMessage*/) {
+    public CategoryController(CategoryService categoryService, UserFeignClient userFeignClient /*ResponseErrorMessage errorMessage*/) {
         this.categoryService = categoryService;
-/*        this.errorMessage = errorMessage;*/
-        this.userWebClientBuilder = userWebClientBuilder;
+        this.userFeignClient = userFeignClient;
+        /*        this.errorMessage = errorMessage;*/
     }
 
     @PostMapping("/id")
@@ -42,9 +42,11 @@ public class CategoryController {
 
     @PostMapping("/add")
     public ResponseEntity<MessageResponse> createCategory(@RequestBody CategoryDTO categoryDTO){
-        userWebClientBuilder.userExists(categoryDTO.userId());
-        categoryService.createCategory(categoryDTO);
-        return new ResponseEntity<>(new MessageResponse("Successfully created"), HttpStatus.OK);
+        if(userFeignClient.getUserById(categoryDTO.userId()) != null){
+            categoryService.createCategory(categoryDTO);
+            return new ResponseEntity<>(new MessageResponse("Successfully created"), HttpStatus.OK);
+        };
+        return new ResponseEntity<>(new MessageResponse(" created"), HttpStatus.NOT_ACCEPTABLE);
     }
 
     @PutMapping("/update")
