@@ -9,7 +9,5 @@ public record UserDTO(Long id,
                       String email,
                       @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
                       String password,
-                      String username,
-                      @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-                      Set<Role> roles) {
+                      String username) {
 }
