@@ -4,4 +4,5 @@ spring:
   config:
     import: configserver:http://localhost:8888
   profiles:
-    active: micro, todo, logging
+    active: micro, todo, logging, rabbit
+
